@@ -120,7 +120,13 @@ void main(){
   var myMap = {12: "Menor", 18: "Mayor", 70: "Adulto mayor"};
   print(myMap);
   Map map2 = {"Entero": 1, "Double": 54.7, "Texto": "Es un texto", 14: 41};
-
+  map2.addAll({"Espiritual": true});
+  print(map2);
+  Map mapaAgregado = {
+    ...myMap,
+    ...map2
+  };
+  print(mapaAgregado);
 
   if (myVariable != false || !myVariable && myVariable){
   }
@@ -156,23 +162,8 @@ void main(){
   myFunc(){}
   final myName = myFunc2("Camilo");
 
-  final miOpcion = Names.Camilo;
-  switch (miOpcion){
-    case Names.Camilo:
-      print("${Names.Camilo}");
-      break;
-    case Names.Clara:
-      var myThirdString = myString + mySecondString;
-      print(myThirdString);
-      break;
-    default:
-      print('Ni Camilo ni Clara');
-      break;
-  }
-
   Programmer meTheProgrammer = Programmer("Camilo", 17, "Kotlin & Flutter");
   meTheProgrammer.code();
-
 }
 
 void myFunc(){}
@@ -181,9 +172,7 @@ String myFunc2(String name){
   return name;
 }
 
-enum Names{
-  Camilo, Clara, Sara
-}
+
 
 class Programmer{
   String name;
