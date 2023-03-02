@@ -9,6 +9,8 @@ void main(List <String> arguments) { // correr en la terminal: dart run Funcione
   // función empaquetada
   var someFunction = funcionConArgumentosOpcionales;
   print(someFunction.call("Camilo", 33));
+
+  // función de orden superior
   auth("Camilo", "9q2w3e4r", funcionConArgumentosOpcionales);
 
   // funciones anónimas, lambdas o closures
