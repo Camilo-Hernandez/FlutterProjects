@@ -13,6 +13,7 @@ Map rating = {
 
 Los tipos de comida pueden variar, al igual que las cantidades de la lista de calificación.
 */
+import 'package:collection/collection.dart';
 
 void main() {
   final Map<String, double> rating = createRatingMap();
@@ -29,7 +30,8 @@ Map<String, double> createRatingMap() {
 Map<String, double> getAverages(Map<String, List<int>> _scoresMap) {
   Map<String, double> _ratingMap = _scoresMap.map((key, value) => MapEntry(
         key,
-        value.reduce((a, b) => a + b) / value.length, // Calcular promedio
+        value.average, // Calcular promedio usando la librería Collection
+        //value.reduce((a, b) => a + b) / value.length, // Calcular promedio
       ));
   print("Mapa de promedios -> $_ratingMap");
   return _ratingMap;
@@ -38,21 +40,21 @@ Map<String, double> getAverages(Map<String, List<int>> _scoresMap) {
 Map<String, List<int>> groupAllScoresInLists(
     Map<String, List<int>> _scoresMap) {
   _scoresMap = groupScoresByCountry(_scoresMap);
-
   _scoresMap = groupAllScoresInAllList(_scoresMap);
-  
   print("Mapa de Scores -> $_scoresMap");
   return _scoresMap;
 }
 
-Map<String, List<int>> groupAllScoresInAllList(Map<String, List<int>> __scoresMap) {
+Map<String, List<int>> groupAllScoresInAllList(
+    Map<String, List<int>> __scoresMap) {
   __scoresMap.forEach((key, value) {
     __scoresMap['Todos'] = [...__scoresMap['Todos']!, ...value];
   });
   return __scoresMap;
 }
 
-Map<String, List<int>> groupScoresByCountry(Map<String, List<int>> __scoresMap) {
+Map<String, List<int>> groupScoresByCountry(
+    Map<String, List<int>> __scoresMap) {
   restaurantes.forEach((restaurante) {
     __scoresMap[restaurante['tipo']] = [
       ...__scoresMap[restaurante['tipo']]!,
