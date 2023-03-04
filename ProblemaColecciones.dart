@@ -9,22 +9,18 @@ Map rating = {
 “Argentina”: 2.5,
 “Todos”: 2.77
 };
-
 */
-
 
 void main() {
   num totalSum = 0;
-  restaurantes.forEach(
-          (restaurante) {
-        restaurante['calificaciones'].forEach((var e) {
-            totalSum += e;
-            // TODO: realizar el ejercicio
-        }
-        );
+  restaurantes.forEach((restaurante) {
+    restaurante['calificaciones'].forEach((var e) {
+      totalSum += e;
+      // TODO: realizar el ejercicio
+    });
 
-  print(totalSum);
-});
+    print(totalSum);
+  });
 }
 
 Set restaurantes = {
