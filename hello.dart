@@ -4,17 +4,17 @@ import 'dart:collection';
 // que sea muy costosa de crear
 
 late List<Object> ListaDeJugadores;
-List<Object> funcionMuyCostosaParaObtenerJugadores(){
+List<Object> funcionMuyCostosaParaObtenerJugadores() {
   return [];
 }
 
-bool isAdmin(){
+bool isAdmin() {
   return true;
 }
 
-void main(){
+void main() {
   // con late, la variable puede ser inicializada dentro un flujo alterno en un if cuando una condición se cumple
-  if (isAdmin()){
+  if (isAdmin()) {
     ListaDeJugadores = funcionMuyCostosaParaObtenerJugadores();
   }
 
@@ -65,18 +65,18 @@ void main(){
   myDynamicVariable[12] = ['Nickle'];
   print(myDynamicVariable.values);
 
-
   var myVariable = true; // por inferencia
 
-  const myConstant = 'Mi constante'; // asignado en tiempo de compilación, debe conocerse el valor
+  const myConstant =
+      'Mi constante'; // asignado en tiempo de compilación, debe conocerse el valor
   final myFinalConstant = myString; // asignado en tiempo de ejecución
 
   // Listas
-  var numbers = [1,2,3,5];
-  List<int> intList = [2,22,222,2222];
-  List<String> nombres = ["Julio","Camilo", "Jorge"];
-  List<double> doubleList = [3,22.3, 35.2];
-  List<num> nums = [2,55,23.35];
+  var numbers = [1, 2, 3, 5];
+  List<int> intList = [2, 22, 222, 2222];
+  List<String> nombres = ["Julio", "Camilo", "Jorge"];
+  List<double> doubleList = [3, 22.3, 35.2];
+  List<num> nums = [2, 55, 23.35];
   List<Object> objects = [35, "Julia", true];
 
   var longitud = nums.length;
@@ -100,19 +100,18 @@ void main(){
   var menu = [
     'menu1',
     'menu2',
-    if (edad > 18) 'Sólo mayores de 18 años', // Si se satisface la condición, agrega la cadena de texto
+    if (edad > 18)
+      'Sólo mayores de 18 años', // Si se satisface la condición, agrega la cadena de texto
   ];
 
   // Crear listas con órdenes en ciclos
-  var menu2 = [
-    for (var i in intList2) "menu de $i"
-  ];
+  var menu2 = [for (var i in intList2) "menu de $i"];
 
   print(menu2);
 
   // Sets: listas de elementos no repetidos
   var dias = {"Lunes", "Martes", "Miércoles", "Domingo"};
-  Set <String> meses = {"Enero","Febrero","Marzo","Abril","Abril"};
+  Set<String> meses = {"Enero", "Febrero", "Marzo", "Abril", "Abril"};
   meses.add("Agosto");
   print(meses);
 
@@ -122,19 +121,18 @@ void main(){
   Map map2 = {"Entero": 1, "Double": 54.7, "Texto": "Es un texto", 14: 41};
   map2.addAll({"Espiritual": true});
   print(map2);
-  Map mapaAgregado = {
-    ...myMap,
-    ...map2
-  };
+  Map mapaAgregado = {...myMap, ...map2};
+
   print(mapaAgregado);
+  Map<String, int> myString2IntMap = {'Solo': 1, 'Duo': 2};
+  myString2IntMap.forEach((key, value) {
+    print("$key -> $value");
+  });
 
-  if (myVariable != false || !myVariable && myVariable){
-  }
-  else if (myString == 'Mi Cadena' || mySecondString.isEmpty){
-
-  } else{
-
-  }
+  // Condicionales
+  if (myVariable != false || !myVariable && myVariable) {
+  } else if (myString == 'Mi Cadena' || mySecondString.isEmpty) {
+  } else {}
 
   // Sound Null Safety
   var score = null;
@@ -146,43 +144,38 @@ void main(){
 
   String? myNullableVariable; // cuando se crea se le asigna el valor nulo
   print(myNullableVariable);
-  myNullableVariable = 'Mi cadena de texto nulable'; // le asigno un valor diferente al nulo
+  myNullableVariable =
+      'Mi cadena de texto nulable'; // le asigno un valor diferente al nulo
   print(myNullableVariable);
   myNullableVariable = null; // vuelvo a asignarle el valor nulo
   print(myNullableVariable);
 
   List<int> myIntList = [1, 5, 10];
-  myIntList.forEach((element) {print(element);
+  myIntList.forEach((element) {
+    print(element);
   });
 
-  Map<String, int> myString2IntMap = {'Solo': 1, 'Duo': 2};
-  myString2IntMap.forEach((key, value) {print("$key -> $value");
-  });
-  
-  myFunc(){}
+  myFunc() {}
   final myName = myFunc2("Camilo");
 
   Programmer meTheProgrammer = Programmer("Camilo", 17, "Kotlin & Flutter");
   meTheProgrammer.code();
 }
 
-void myFunc(){}
+void myFunc() {}
 
-String myFunc2(String name){
+String myFunc2(String name) {
   return name;
 }
 
-
-
-class Programmer{
+class Programmer {
   String name;
   int age;
   String language;
 
   Programmer(this.name, this.age, this.language);
 
-  void code(){
+  void code() {
     print("I'm Coding!");
   }
 }
-

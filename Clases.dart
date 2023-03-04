@@ -1,5 +1,4 @@
 // Clases
-import 'dart:ffi';
 
 void main() {
   var book = Book("1984", "George Orwell", 30);
@@ -49,11 +48,11 @@ class Book {
 
   // Constructor con diferentes argumentos a los originales pero igual los devuelve.
   // Recibe una lista de String authors pero sí asigna al String author.
-  Book.multipleAuthorsBook(this.title, List<String> authors, this.id) :
-        author = authors.join(", ");
+  Book.multipleAuthorsBook(this.title, List<String> authors, this.id)
+      : author = authors.join(", ");
 
   // Factory constructor: Fábrica de constructores: dependiendo de la lógica se crea una u otra instancia
-  factory Book.fromJson(Map<String, String> json){
+  factory Book.fromJson(Map<String, String> json) {
     if (json.containsKey("author") && json.containsKey("title")) {
       return Book(json["title"] as String, json["author"] as String, 100);
     } else
@@ -61,12 +60,12 @@ class Book {
   }
 
   // Los factory son útiles cuando se trata con caches
-  static final Map<int, Book> cacheBooks = <int, Book>{
-  }; // supongamos que tengo un mapa lleno de libros con id's
+  static final Map<int, Book> cacheBooks =
+      <int, Book>{}; // supongamos que tengo un mapa lleno de libros con id's
 
-  factory Book.fromCache(int id){
-    return cacheBooks[id] ?? Book
-        .blankBook(); // retorna el libro con el ID dado, si eso retorna null, devuelve un libro en blanco
+  factory Book.fromCache(int id) {
+    return cacheBooks[id] ??
+        Book.blankBook(); // retorna el libro con el ID dado, si eso retorna null, devuelve un libro en blanco
   }
 
   // Métodos
@@ -77,38 +76,35 @@ class Book {
 
   // Definición de operadores personalizados
   operator +(Book book2) {
-    return Book(
-        "${this.title}, ${book2.title}",
-        "${this.author}, ${book2.author}",
-        this.id + book2.id);
+    return Book("${this.title}, ${book2.title}",
+        "${this.author}, ${book2.author}", this.id + book2.id);
   }
 }
 
 // Clase abstracta. Shelf -> estante de libros
-abstract class Shelf{
+abstract class Shelf {
   // métodos abstractos, para que sean implementados por los hijos (no tiene llaves)
   void sortBooks();
 
   // método no abstracto: implementado (tiene llaves)
-  int getNumberOfBooks(){
+  int getNumberOfBooks() {
     return 100;
   }
 }
 
-class PapersShelf extends Shelf{
+class PapersShelf extends Shelf {
   @override
   void sortBooks() {
     // ordenar de acuerdo a la temática y años de publicación
   }
 
   @override
-  int getNumberOfBooks(){
+  int getNumberOfBooks() {
     return 100000;
   }
-
 }
 
-class ChildrenBooksShelf extends Shelf{
+class ChildrenBooksShelf extends Shelf {
   @override
   void sortBooks() {
     // de acuerdo a la edad
@@ -117,11 +113,11 @@ class ChildrenBooksShelf extends Shelf{
   @override
   int getNumberOfBooks() {
     // TODO: implement getNumberOfBooks
-    return super.getNumberOfBooks()*20;
+    return super.getNumberOfBooks() * 20;
   }
 }
 
-class FictionShelf extends Shelf{
+class FictionShelf extends Shelf {
   @override
   void sortBooks() {
     // ordenar por nombre de autor
