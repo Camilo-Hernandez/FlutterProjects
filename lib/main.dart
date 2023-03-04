@@ -1,5 +1,5 @@
 import 'package:css_colors/css_colors.dart'; // para los colores
-import 'package:flutter/cupertino.dart'; // para el estilo de iOS
+import 'package:flutter/material.dart'; // para el estilo de iOS
 
 /* Hot reload: actualizar la UI en la jerarquía de Widgets
  fuera del método build no hay hot reload
