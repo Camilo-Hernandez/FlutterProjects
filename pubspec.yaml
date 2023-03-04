@@ -1,0 +1,7 @@
+name: HelloDart
+
+environment:
+  sdk: '^2.13.0'
+dependencies:
+  collection: ^1.17.1
+
