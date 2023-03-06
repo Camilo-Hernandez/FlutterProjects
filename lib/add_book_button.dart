@@ -1,26 +1,18 @@
 import 'package:booksy/user_data.dart';
 import 'package:flutter/material.dart';
 
-class AddBookButton extends StatefulWidget {
-  const AddBookButton({required this.bookId, super.key});
-
+class AddBookButton extends StatelessWidget {
   final String bookId;
 
-  // Se debe implementar otra clase que almacene el estado. De esta manera, se separa el estado del widget (valores numéricos, variables) del estado de su apariencia.
-  @override
-  _AddBookButtonState createState() {
-    return _AddBookButtonState();
-  }
-}
-
-class _AddBookButtonState extends State<AddBookButton> {
-  _AddBookButtonState();
+  const AddBookButton({required this.bookId, super.key});
 
   @override
   Widget build(BuildContext context) {
     UserData userData = UserData.of(context);
     // widget hace la llamada a AddBookButton !!!!! Es una llamada al widget al cual está asociado el estado
-    bool isSaved = userData.booksIds.contains(widget.bookId);
+    // No hay necesidad de llamarlo ahora pues el widget es stateless
+    // En la jerga de Flutter se le llama Lift State
+    bool isSaved = userData.booksIds.contains(bookId);
 
     var addToLibraryButton = isSaved
         ? ElevatedButton(

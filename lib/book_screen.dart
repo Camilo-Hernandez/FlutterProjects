@@ -52,6 +52,7 @@ class BookScreen extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.only(top: 10),
                 ),
+                // Cambia el nombre para que busque uno diferente y verás que el botón cambia
                 const AddBookButton(bookId: "douglas-hitch"),
                 const Padding(
                   padding: EdgeInsets.only(top: 5),
