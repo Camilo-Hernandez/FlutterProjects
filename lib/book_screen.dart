@@ -9,12 +9,13 @@ class BookScreen extends StatelessWidget {
   final String bookDescription;
   final String bookCoverURI;
 
-  const BookScreen(
-      {super.key,
-      required this.bookTitle,
-      required this.authorName,
-      required this.bookDescription,
-      required this.bookCoverURI});
+  const BookScreen({
+    super.key,
+    required this.bookTitle,
+    required this.authorName,
+    required this.bookDescription,
+    required this.bookCoverURI,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,7 @@ class BookScreen extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.only(top: 10),
                 ),
-                const AddBookButton(),
+                const AddBookButton(bookId: "douglas-hitch"),
                 const Padding(
                   padding: EdgeInsets.only(top: 5),
                 )

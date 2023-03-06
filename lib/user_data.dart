@@ -8,6 +8,9 @@ class UserData extends InheritedWidget {
     required Widget child,
   }) : super(key: key, child: child);
 
+  static UserData of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<UserData>()!;
+
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) {
     // TODO: ¿Debo notificar a mis hijos para que se actualicen?
