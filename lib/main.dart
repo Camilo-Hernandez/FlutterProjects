@@ -45,15 +45,13 @@ class Booksy extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Booksy"),
       ),
-      body: const UserData(
-          booksIds: booksIds,
-          // se obtiene de una base de datos, en servidor por ejemplo, consultando al backend
+      body: const UserDataContainerWidget(
           child: BookScreen(
-            bookTitle: bookTitle,
-            authorName: authorName,
-            bookDescription: bookDescription,
-            bookCoverURI: bookCoverURI,
-          )),
+        bookTitle: bookTitle,
+        authorName: authorName,
+        bookDescription: bookDescription,
+        bookCoverURI: bookCoverURI,
+      )),
     );
   }
 }
