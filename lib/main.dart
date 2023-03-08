@@ -31,11 +31,10 @@ class ProfileScreen extends StatelessWidget {
           Expanded(
               child: SingleChildScrollView(
             child: Column(children: [
-              const Padding(padding: EdgeInsets.only(top: 20)),
+              const SizedBox(height: 20),
               const UserDescription(),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(children: const [
                   SizedBox(height: 20),
                   MyListTile(

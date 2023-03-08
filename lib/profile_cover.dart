@@ -23,9 +23,7 @@ class ProfileCover extends StatelessWidget {
                         style: TextStyle(fontSize: 15),
                       ),
                     ])),
-            const SizedBox(
-              width: 20,
-            ),
+            const SizedBox(width: 20),
             const CircleAvatar(
                 backgroundImage: AssetImage('assets/images/profile-pic.jpg'),
                 radius: 40),
