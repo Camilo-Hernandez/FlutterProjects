@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:profile_screen/profile_buttons.dart';
+import 'package:profile_screen/profile_cover.dart';
 import 'package:profile_screen/social_network_info.dart';
 import 'package:profile_screen/user_description.dart';
 
-import 'field_row.dart';
+import 'my_list_tile.dart';
 
 void main() {
   var appTitle = 'Profile Screen Example';
@@ -37,7 +38,7 @@ class ProfileScreen extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: Column(children: const [
                   SizedBox(height: 20),
-                  FieldRow(
+                  MyListTile(
                       "Libros leídos",
                       "Número de libros que este usuario ha finalizado, hola Dolph, hola Jimena, cómo están? Les gusta el guacamole? Espero que sí",
                       "23"),
@@ -61,39 +62,5 @@ class ProfileScreen extends StatelessWidget {
             ]),
           )),
         ]));
-  }
-}
-
-class ProfileCover extends StatelessWidget {
-  const ProfileCover({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(alignment: AlignmentDirectional.bottomEnd, children: [
-      const Image(image: AssetImage("assets/images/landscape2.jpeg")),
-      Padding(
-          padding: const EdgeInsets.all(25),
-          child: Row(mainAxisSize: MainAxisSize.min, children: [
-            DefaultTextStyle(
-                style: const TextStyle(fontSize: 20, color: Colors.white),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: const [
-                      Text(
-                        "Camilo Hernández Ruiz",
-                      ),
-                      Text(
-                        "Cali, Colombia",
-                        style: TextStyle(fontSize: 15),
-                      ),
-                    ])),
-            const SizedBox(
-              width: 20,
-            ),
-            const CircleAvatar(
-                backgroundImage: AssetImage('assets/images/profile-pic.jpg'),
-                radius: 40),
-          ])),
-    ]);
   }
 }

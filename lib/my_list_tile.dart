@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class FieldRow extends StatelessWidget {
+class MyListTile extends StatelessWidget {
   final String text1;
   final String text2;
   final String text3;
 
-  const FieldRow(
+  const MyListTile(
     this.text1,
     this.text2,
     this.text3, {
