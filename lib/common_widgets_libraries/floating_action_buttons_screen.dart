@@ -10,10 +10,9 @@ class FloatingActionButtonScreen extends StatefulWidget {
 
 class _FloatingActionButtonScreenState
     extends State<FloatingActionButtonScreen> {
-  bool _isButtonGreen = true;
-  Color _smallButtonBackgroundColor = Colors.green;
-  Color _standardButtonBackgroundColor = Colors.green;
-  Color _extendedButtonBackgroundColor = Colors.green;
+  MaterialColor _smallButtonBackgroundColor = Colors.green;
+  MaterialColor _extendedButtonBackgroundColor = Colors.green;
+  MaterialColor _standardButtonBackgroundColor = Colors.green;
 
   @override
   Widget build(BuildContext context) {
@@ -22,25 +21,39 @@ class _FloatingActionButtonScreenState
         title: const Text('Floating Action Button Screen'),
       ),
       body: const Center(
-        child:
-            Text('Press the button below to toggle the visibility of the FAB'),
+        child: Text('Press the buttons below to toggle their colors'),
       ),
       floatingActionButton:
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         FloatingActionButton.small(
-          onPressed: _toggleSmallButtonColor,
+          //.small() and .large()
+          onPressed: () => setState(() {
+            _smallButtonBackgroundColor =
+                _smallButtonBackgroundColor == Colors.green
+                    ? Colors.blue
+                    : Colors.green;
+          }),
           backgroundColor: _smallButtonBackgroundColor,
           child: const Icon(Icons.navigation),
         ),
         FloatingActionButton.extended(
-          onPressed: _toggleExtendedButtonColor,
+          onPressed: () => setState(() {
+            _extendedButtonBackgroundColor =
+                _extendedButtonBackgroundColor == Colors.green
+                    ? Colors.blue
+                    : Colors.green;
+          }),
           label: const Text("Nuevo"),
           icon: const Icon(Icons.navigation),
           backgroundColor: _extendedButtonBackgroundColor,
         ),
-        // Standard Button
         FloatingActionButton(
-          onPressed: _toggleStandardButtonColor,
+          onPressed: () => setState(() {
+            _standardButtonBackgroundColor =
+                _standardButtonBackgroundColor == Colors.green
+                    ? Colors.blue
+                    : Colors.green;
+          }),
           backgroundColor: _standardButtonBackgroundColor,
           child: const Icon(Icons.add),
         ),
@@ -53,38 +66,5 @@ class _FloatingActionButtonScreenState
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );
-  }
-
-  void _toggleSmallButtonColor() {
-    setState(() {
-      _isButtonGreen = !_isButtonGreen;
-      if (_isButtonGreen) {
-        _smallButtonBackgroundColor = Colors.green;
-      } else {
-        _smallButtonBackgroundColor = Colors.blue;
-      }
-    });
-  }
-
-  void _toggleExtendedButtonColor() {
-    setState(() {
-      _isButtonGreen = !_isButtonGreen;
-      if (_isButtonGreen) {
-        _extendedButtonBackgroundColor = Colors.green;
-      } else {
-        _extendedButtonBackgroundColor = Colors.blue;
-      }
-    });
-  }
-
-  void _toggleStandardButtonColor() {
-    setState(() {
-      _isButtonGreen = !_isButtonGreen;
-      if (_isButtonGreen) {
-        _standardButtonBackgroundColor = Colors.green;
-      } else {
-        _standardButtonBackgroundColor = Colors.blue;
-      }
-    });
   }
 }

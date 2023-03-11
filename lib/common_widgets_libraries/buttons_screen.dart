@@ -43,7 +43,7 @@ class _ButtonsState extends State<Buttons> {
                     debugPrint("ElevatedButton - Botón elevado presionado");
                   },
             // null desactiva el botón. Aquí preguntamos por el boolean para activarlo o desactivarlo
-            child: const Text("OutlineButton"),
+            child: const Text("ElevatedButton"),
           ),
         ],
       ),

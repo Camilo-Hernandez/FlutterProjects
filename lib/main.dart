@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'common_widgets_libraries/floating_action_button.dart';
+import 'common_widgets_libraries/floating_action_buttons_screen.dart';
 
 const appTitle = 'Widgets Catalog App';
 
