@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Buttons extends StatefulWidget {
-  const Buttons({super.key});
+class ButtonsScreen extends StatefulWidget {
+  const ButtonsScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _ButtonsState();
+  State<StatefulWidget> createState() => _ButtonsScreenState();
 }
 
-class _ButtonsState extends State<Buttons> {
+class _ButtonsScreenState extends State<ButtonsScreen> {
   bool isButtonDisabled = false;
   @override
   Widget build(BuildContext context) {

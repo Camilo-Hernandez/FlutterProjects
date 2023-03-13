@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'common_widgets_libraries/floating_action_buttons_screen.dart';
+import 'common_widgets_libraries/bottom_navigation_bar_screen.dart';
 
 const appTitle = 'Widgets Catalog App';
 
@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(appTitle),
       ),
-      body: const FloatingActionButtonScreen(),
+      body: const BottomNavigationBarScreen(),
     );
   }
 }
