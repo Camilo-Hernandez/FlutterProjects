@@ -1,3 +1,3 @@
-# state_management_examples
+# State Management Examples
 
 Ejemplos de manejo de estados en la app
