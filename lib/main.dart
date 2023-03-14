@@ -1,86 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:state_management_examples/lift_state_example.dart';
+import 'package:state_management_examples/provider_example.dart';
 
 void main() {
-  const String title = 'State Management';
+  const String title = 'State Management Examples';
   runApp(MaterialApp(
       title: title,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(title),
-        ),
-        body: const SettingsScreen(),
-      )));
+      home: const SettingsScreenExamples(title)));
 }
 
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+class SettingsScreenExamples extends StatefulWidget {
+  const SettingsScreenExamples(this.title, {super.key});
+
+  final String title;
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  State<SettingsScreenExamples> createState() => _SettingsScreenExamples();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
-  bool _isChecked = true;
+class _SettingsScreenExamples extends State<SettingsScreenExamples> {
+  final _screens = [
+    const SettingsLiftStateExampleScreen(),
+    ChangeNotifierProvider(
+      create: (context) => ColorSettings(),
+      child: const SettingProviderExampleScreen(),
+    ), // la clase podría recibir el context
+  ];
 
-  void _onChangedCheckbox(bool? value) {
-    setState(() {
-      _isChecked = !_isChecked; // Este estado se pierde cuando la app se cierra
-    });
-  }
+  final _bottomNavigationBarItems = const <BottomNavigationBarItem>[
+    BottomNavigationBarItem(icon: Icon(Icons.elevator), label: "Lift State"),
+    BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "Provider"),
+  ];
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ColorsSelection(
-          isChecked: _isChecked,
-          onChangedCheckbox: _onChangedCheckbox,
-        ),
-        ColoredBox(
-          showColor: _isChecked,
-        ),
-      ],
-    );
-  }
-}
-
-class ColorsSelection extends StatelessWidget {
-  // Con StatelessWidget se levanta el estado, haciendo que otros widgets se encarguen de él
-  // Util para que otros hermanos accedan al estado
-  final bool isChecked;
-  final ValueChanged<bool?> onChangedCheckbox;
-
-  const ColorsSelection(
-      {super.key, required this.isChecked, required this.onChangedCheckbox});
+  var _selectedItem = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      Checkbox(value: isChecked, onChanged: onChangedCheckbox),
-      Expanded(
-        child: Text(
-          'Estado se pierde cuando la app se cierra, porque es efímero',
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
       ),
-    ]);
-  }
-}
-
-class ColoredBox extends StatelessWidget {
-  final bool showColor;
-
-  const ColoredBox({super.key, required this.showColor});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: showColor ? Colors.red : Colors.black38,
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.all(10),
+      body: _screens[_selectedItem],
+      bottomNavigationBar: BottomNavigationBar(
+        items: _bottomNavigationBarItems,
+        currentIndex: _selectedItem,
+        onTap: (index) {
+          setState(() {
+            _selectedItem = index;
+          });
+        },
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.black38,
+      ),
     );
   }
 }
