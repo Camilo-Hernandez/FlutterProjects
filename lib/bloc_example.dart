@@ -18,28 +18,52 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Creación del estado
-class ColorSettings4 {
+class ColorSettings5 {
   bool useRed;
-  ColorSettings4(this.useRed);
+  ColorSettings5(this.useRed);
 }
 
-// Crear el cubit que exponga/modifique el estado ColorSettings. Aquí se pone la lógica del negocio.
-class ColorSettingsCubit extends Cubit<ColorSettings4> {
-  // Cualquiera que fuera, tiene que recibir un estado inicial, que permite interactuar con él al exponerlo
-  ColorSettingsCubit(super.initialState);
+// El BLoC se basa en eventos para reaccionar a ellos y producir una acción
+// Se deben crear todos los eventos en la UI para que el bloc reaccione de acuerdo a la lógica de negocio.
+// Luego de ello, se llama el build
+// Todos los eventos de un screen se agrupan con una clase abstracta
+// Primero se crea la superclase de los eventos asociados al estado
+abstract class ColorSettingsEvent {
+  const ColorSettingsEvent();
+}
 
-  void setRed() {
-    // Se tiene que crear un nuevo state para que pueda llamar al rebuild
-    emit(ColorSettings4(true));
-  }
+// Se desacoplan los eventos
+class SetRedColorEvent extends ColorSettingsEvent {
+  const SetRedColorEvent();
+}
 
-  void unsetRed() {
-    emit(ColorSettings4(false));
+class UnsetRedColorEvent extends ColorSettingsEvent {
+  const UnsetRedColorEvent();
+}
+
+// Luego se crea el Bloc del estado. Recibe la superclase de los eventos y el estado
+// Aquí se maneja la lógica del negocio
+class ColorSettingsBloc extends Bloc<ColorSettingsEvent, ColorSettings5> {
+  // Estado inicial: la diferencia entre las dos formas es si se da o no el acceso desde afuera para setear el estado inicial. Si no, es inmodificable para todas las instancias
+  // Así se setea para que el estado se pueda pasar desde afuera, desde el llamado del constructor
+  ColorSettingsBloc(ColorSettings5 initialState) : super(initialState) {
+    // Así se crea el estado desde la creación de la clase
+    // ColorSettingsBloc() : super(ColorSettings5(false)) {
+
+    // recibe el tipo de evento, y de argumentos: event handler y un event transformer (emisor de estados) Por convención se nombran así
+    on<SetRedColorEvent>((event, emit) {
+      // lógica
+      emit(ColorSettings5(true));
+    });
+    on<UnsetRedColorEvent>((event, emit) {
+      // lógica
+      emit(ColorSettings5(false));
+    });
   }
 }
 
-class SettingsCubitExampleScreen extends StatelessWidget {
-  const SettingsCubitExampleScreen({Key? key}) : super(key: key);
+class SettingsBlocExampleScreen extends StatelessWidget {
+  const SettingsBlocExampleScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +82,7 @@ class ColorsSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ColorSettingsCubit, ColorSettings4>(
+    return BlocBuilder<ColorSettingsBloc, ColorSettings5>(
         builder: (context, colorSettingsState) {
       return Row(
         children: [
@@ -76,11 +100,14 @@ class ColorsSelection extends StatelessWidget {
   }
 
   void _onCheckBoxPressed(bool isChecked, BuildContext context) {
-    var colorSettingsCubit = context.read<ColorSettingsCubit>();
+    var colorSettingsBloc = context.read<ColorSettingsBloc>();
     if (isChecked) {
-      colorSettingsCubit.setRed();
+      // De esta forma se pueden llamar los eventos desde cualquier parte,
+      // lo que lo hace más flexible
+      // El método add añade el evento a la cola de eventos
+      colorSettingsBloc.add(const SetRedColorEvent());
     } else {
-      colorSettingsCubit.unsetRed();
+      colorSettingsBloc.add(const UnsetRedColorEvent());
     }
   }
 }
@@ -92,7 +119,7 @@ class ColoredBox extends StatelessWidget {
   Widget build(BuildContext context) {
     // El Builder es el que contruye los widgets que van a consumir el estado
     // Para crearlo, se le pasan el Cubit y el estado
-    return BlocBuilder<ColorSettingsCubit, ColorSettings4>(
+    return BlocBuilder<ColorSettingsBloc, ColorSettings5>(
       builder: (context, colorSettingsState) {
         // aquí se está consumiendo el estado al pasarle el estado colorSettingsState, de tipo ColorSettings4
         return Container(
