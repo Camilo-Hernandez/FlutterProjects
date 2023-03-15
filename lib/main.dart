@@ -12,6 +12,7 @@ void main() {
   runApp(MaterialApp(
       title: title,
       theme: ThemeData(
+        useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
       home: const SettingsScreenExamples(title)));
