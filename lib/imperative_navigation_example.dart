@@ -13,7 +13,7 @@ void main() {
   var title = 'Navigation API Examples';
   runApp(MaterialApp(
     home: const HomeScreen(),
-    title: title = 'Navigation API Examples',
+    title: title,
     routes: <String, WidgetBuilder>{
       // Poner el nombre de la ruta y el builder de la page
       // La ventaja es que se centraliza el directorio de todas las pantallas en un solo lugar
@@ -43,7 +43,9 @@ class HomeScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/third-screen');
+              Navigator.pushNamed(context, '/third-screen',
+                  // Cualquier Object puede ser pasado
+                  arguments: 'Argumento pasado desde Home Screen');
             },
             child: const Text('Declarative: Open route with .pushNamed()'),
           ),
@@ -74,6 +76,7 @@ class ThirdScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final message = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Third Screen'),
@@ -83,6 +86,7 @@ class ThirdScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text('Tercera pantalla'),
+            Text('Argumento: $message'),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
