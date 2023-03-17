@@ -17,7 +17,17 @@ void main() {
     routes: <String, WidgetBuilder>{
       // Poner el nombre de la ruta y el builder de la page
       // La ventaja es que se centraliza el directorio de todas las pantallas en un solo lugar
-      '/third-screen': (context) => const ThirdScreen(),
+      '/third-screen': (context) => const ThirdScreen(""),
+    },
+    onGenerateRoute: (settings) {
+      if (settings.name!.contains('third-screen')) {
+        var uri = Uri.parse(settings.name!);
+        if (uri.pathSegments.length >= 2) {
+          var id = uri.pathSegments[1];
+          return MaterialPageRoute(builder: (context) => ThirdScreen(id));
+        }
+      }
+      return null;
     },
   ));
 }
@@ -39,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const SecondScreen()),
               );
             },
-            child: const Text('Imperative: Open route with .push()'),
+            child: const Text('Navigator 1.0: Open route with .push()'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -47,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                   // Cualquier Object puede ser pasado
                   arguments: 'Argumento pasado desde Home Screen');
             },
-            child: const Text('Declarative: Open route with .pushNamed()'),
+            child: const Text('Navigator 1.0: Open route with .pushNamed()'),
           ),
         ],
       ),
@@ -72,11 +82,12 @@ class SecondScreen extends StatelessWidget {
 }
 
 class ThirdScreen extends StatelessWidget {
-  const ThirdScreen({super.key});
+  const ThirdScreen(String message, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    final message = ModalRoute.of(context)?.settings.arguments as String;
+    // No se necesita esta línea cuando
+    // final message = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Third Screen'),
@@ -86,7 +97,7 @@ class ThirdScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text('Tercera pantalla'),
-            Text('Argumento: $message'),
+            Text('Argumento: $this.message'),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
